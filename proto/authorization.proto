@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package insurance;
+
+import "enums.proto";
+
+// Step 2 — prior authorization for a service (e.g. MRI).
+
+message AuthorizationRequest {
+  int32 policy_id = 1;
+  string member_id = 2;
+  string service_code = 3;  // e.g. MRI
+  string provider_id = 4;
+  bool in_network = 5;
+}
+
+message AuthorizationResponse {
+  AuthorizationDecision decision = 1;
+  string authorization_id = 2;
+  string message = 3;
+}

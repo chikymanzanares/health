@@ -1,1 +1,23 @@
-
+# Health Claims Demo
+#
+# Flask front-end (login + claim UI) + gRPC InsuranceService backend.
+#
+# Quick start:
+#   cd health
+#   make up
+#
+# Open http://127.0.0.1:5000
+#   juanjo / juanjo01
+#   tom / tom01
+#
+# Architecture:
+#   Browser → Flask (frontend:5000) → gRPC InsuranceService (backend:50051)
+#
+# gRPC RPCs:
+#   CheckEligibility → RequestAuthorization → SubmitClaim
+#
+# Makefile:
+#   make up          start stack
+#   make down        stop stack
+#   make proto       compile proto stubs
+#   make logs        follow logs

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package insurance;
+
+import "eligibility.proto";
+import "authorization.proto";
+import "claim.proto";
+
+// Insurance claim lifecycle:
+// 1) CheckEligibility
+// 2) RequestAuthorization
+// 3) SubmitClaim
+
+service InsuranceService {
+  rpc CheckEligibility(EligibilityRequest) returns (EligibilityResponse);
+  rpc RequestAuthorization(AuthorizationRequest) returns (AuthorizationResponse);
+  rpc SubmitClaim(ClaimRequest) returns (ClaimResponse);
+}

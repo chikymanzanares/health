@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package insurance;
+
+import "enums.proto";
+
+// Step 3 — claim adjudication after the service was performed.
+
+message ClaimRequest {
+  int32 policy_id = 1;
+  string member_id = 2;
+  ClaimType type = 3;
+  double amount = 4;  // billed amount
+  string description = 5;
+  string authorization_id = 6;
+  string provider_id = 7;
+  bool in_network = 8;
+}
+
+message ClaimResponse {
+  string claim_id = 1;
+  ClaimStatus status = 2;
+  double billed_amount = 3;
+  double negotiated_amount = 4;
+  double deductible_applied = 5;
+  double coinsurance_patient = 6;
+  double patient_responsibility = 7;
+  double insurer_pays = 8;
+  string message = 9;
+}

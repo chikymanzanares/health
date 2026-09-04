@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}File a claim · Health Claims{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>File a claim</h1>
+  <p class="muted">Posts to <code>POST /claims</code>. Demo policy <code>1001</code> (Gold PPO, member <code>M-1001</code>).</p>
+  <form method="post" action="{{ url_for('claims_create') }}" class="stack">
+    <label>
+      Policy ID
+      <input name="policy_id" type="number" value="1001" required />
+    </label>
+    <label>
+      Member ID
+      <input name="member_id" value="M-1001" required />
+    </label>
+    <label>
+      Claim type
+      <select name="type">
+        <option value="medical_expense" selected>medical_expense</option>
+        <option value="pharmacy">pharmacy</option>
+        <option value="dental">dental</option>
+      </select>
+    </label>
+    <label>
+      Amount (billed)
+      <input name="amount" type="number" step="0.01" value="450" required />
+    </label>
+    <label>
+      Description
+      <input name="description" value="MRI scan" required />
+    </label>
+    <label>
+      Provider ID
+      <input name="provider_id" value="PROV-MRI-01" required />
+    </label>
+    <label class="check">
+      <input type="checkbox" name="in_network" checked />
+      In-network provider
+    </label>
+    <button type="submit">Submit claim</button>
+  </form>
+</section>
+{% endblock %}

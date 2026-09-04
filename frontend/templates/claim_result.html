@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Claim result · Health Claims{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Claim result</h1>
+  {% if result.ok %}
+  <p class="ok">Pipeline completed successfully.</p>
+  {% else %}
+  <p class="err">Stopped at step: <strong>{{ result.step }}</strong></p>
+  {% endif %}
+
+  <h2>1. Eligibility</h2>
+  {% if result.eligibility %}
+  <pre>{{ result.eligibility | tojson(indent=2) }}</pre>
+  {% else %}<p class="muted">—</p>{% endif %}
+
+  <h2>2. Prior authorization</h2>
+  {% if result.authorization %}
+  <pre>{{ result.authorization | tojson(indent=2) }}</pre>
+  {% else %}<p class="muted">—</p>{% endif %}
+
+  <h2>3. Claim adjudication</h2>
+  {% if result.claim %}
+  <pre>{{ result.claim | tojson(indent=2) }}</pre>
+  {% if result.claim.status == "ADJUDICATED" %}
+  <ul class="amounts">
+    <li>Negotiated: <strong>${{ '%.2f'|format(result.claim.negotiated_amount) }}</strong></li>
+    <li>Deductible: <strong>${{ '%.2f'|format(result.claim.deductible_applied) }}</strong></li>
+    <li>Patient coinsurance: <strong>${{ '%.2f'|format(result.claim.coinsurance_patient) }}</strong></li>
+    <li>Patient total: <strong>${{ '%.2f'|format(result.claim.patient_responsibility) }}</strong></li>
+    <li>Insurer pays: <strong>${{ '%.2f'|format(result.claim.insurer_pays) }}</strong></li>
+  </ul>
+  {% endif %}
+  {% else %}<p class="muted">—</p>{% endif %}
+
+  <p>
+    <a class="btn" href="{{ url_for('claims_new') }}">File another</a>
+    <a class="btn secondary" href="{{ url_for('home') }}">Home</a>
+  </p>
+</section>
+{% endblock %}

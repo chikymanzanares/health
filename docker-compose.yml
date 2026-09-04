@@ -1,0 +1,30 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: health-grpc
+    ports:
+      - "50051:50051"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: health-web
+    ports:
+      - "5000:5000"
+    environment:
+      GRPC_HOST: backend
+      GRPC_PORT: "50051"
+      DATABASE_PATH: /data/health.db
+      FLASK_SECRET: change-me-in-prod
+    volumes:
+      - health_db:/data
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  health_db:

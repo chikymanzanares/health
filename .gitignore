@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.env
+.venv/
+venv/
+*.db
+
+# Generated protobuf stubs (Docker build / make proto)
+backend/infrastructure/grpc/generated/*_pb2.py
+backend/infrastructure/grpc/generated/*_pb2_grpc.py
+frontend/*_pb2.py
+frontend/*_pb2_grpc.py
+
+# Legacy locations
+backend/*_pb2.py
+backend/*_pb2_grpc.py

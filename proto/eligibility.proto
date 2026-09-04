@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package insurance;
+
+import "enums.proto";
+
+// Step 1 — is the member's policy active?
+//
+// policy_id  = insurance contract / plan (e.g. 1001 Gold PPO)
+// member_id  = person covered by that policy (e.g. M-1001)
+// One policy can cover several members (subscriber + dependents).
+
+message EligibilityRequest {
+  int32 policy_id = 1;
+  string member_id = 2;
+}
+
+message EligibilityResponse {
+  bool eligible = 1;
+  EligibilityStatus status = 2;
+  string plan_name = 3;
+  string message = 4;
+}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Home · Health Claims{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Welcome, {{ user }}</h1>
+  <p>File an insurance claim. Flask receives the HTTP request and processes it through the gRPC <code>InsuranceService</code>:</p>
+  <ol class="flow">
+    <li><strong>CheckEligibility</strong> — is the policy active?</li>
+    <li><strong>RequestAuthorization</strong> — prior auth for MRI / specialist service</li>
+    <li><strong>SubmitClaim</strong> — adjudicate patient vs insurer amounts</li>
+  </ol>
+  <p>
+    <a class="btn" href="{{ url_for('claims_new') }}">File a claim</a>
+  </p>
+</section>
+{% endblock %}
